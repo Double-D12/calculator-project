@@ -1,0 +1,443 @@
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: #333;
+    --calc-bg: #fff;
+    --btn-bg: #e0e0e0;
+    --btn-hover: #d0d0d0;
+    --btn-active: #b0b0b0;
+    --operation-btn: #ff9500;
+    --operation-hover: #ffaa33;
+    --operation-active: #ff8c00;
+    --equals-btn: #4caf50;
+    --equals-hover: #66bb6a;
+    --equals-active: #43a047;
+    --clear-btn: #f44336;
+    --clear-hover: #ef5350;
+    --clear-active: #e53935;
+    --display-bg: #f9f9f9;
+    --border-color: #ddd;
+    --quiz-option-bg: #e3f2fd;
+    --quiz-option-hover: #bbdefb;
+    --correct-answer: #81c784;
+    --wrong-answer: #e57373;
+}
+
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --calc-bg: #1e1e1e;
+    --btn-bg: #333;
+    --btn-hover: #444;
+    --btn-active: #555;
+    --operation-btn: #ff9500;
+    --operation-hover: #ffaa33;
+    --operation-active: #ff8c00;
+    --equals-btn: #2e7d32;
+    --equals-hover: #388e3c;
+    --equals-active: #1b5e20;
+    --clear-btn: #c62828;
+    --clear-hover: #d32f2f;
+    --clear-active: #b71c1c;
+    --display-bg: #252525;
+    --border-color: #444;
+    --quiz-option-bg: #1e3a5f;
+    --quiz-option-hover: #3d5a80;
+    --correct-answer: #2e7d32;
+    --wrong-answer: #c62828;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.calculator-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--calc-bg);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.mode-toggle button {
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.mode-toggle button .fa-moon {
+    position: absolute;
+    opacity: 1;
+}
+
+.mode-toggle button .fa-sun {
+    position: absolute;
+    opacity: 0;
+}
+
+.dark-mode .mode-toggle button .fa-moon {
+    opacity: 0;
+}
+
+.dark-mode .mode-toggle button .fa-sun {
+    opacity: 1;
+}
+
+.mode-selector {
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 5px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 8px 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.mode-btn.active {
+    background-color: var(--operation-btn);
+    color: white;
+}
+
+.mode-btn i {
+    font-size: 0.9rem;
+}
+
+.calculator {
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.display {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--display-bg);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: right;
+    border: 1px solid var(--border-color);
+}
+
+.previous-operand {
+    min-height: 24px;
+    font-size: 1rem;
+    color: #666;
+    overflow: hidden;
+}
+
+.dark-mode .previous-operand {
+    color: #aaa;
+}
+
+.current-operand {
+    font-size: 2rem;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+button {
+    height: 60px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    outline: none;
+}
+
+button:hover {
+    background-color: var(--btn-hover);
+}
+
+button:active {
+    background-color: var(--btn-active);
+}
+
+.number {
+    font-weight: bold;
+}
+
+.operation {
+    background-color: var(--operation-btn);
+    color: white;
+}
+
+.operation:hover {
+    background-color: var(--operation-hover);
+}
+
+.operation:active {
+    background-color: var(--operation-active);
+}
+
+#equals {
+    background-color: var(--equals-btn);
+    color: white;
+}
+
+#equals:hover {
+    background-color: var(--equals-hover);
+}
+
+#equals:active {
+    background-color: var(--equals-active);
+}
+
+#clear {
+    background-color: var(--clear-btn);
+    color: white;
+}
+
+#clear:hover {
+    background-color: var(--clear-hover);
+}
+
+#clear:active {
+    background-color: var(--clear-active);
+}
+
+/* Scientific Calculator Styles */
+.scientific-mode .buttons {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.sci-func {
+    font-size: 1rem;
+    background-color: var(--btn-bg);
+}
+
+.sci-func:hover {
+    background-color: var(--btn-hover);
+}
+
+/* Currency Converter Styles */
+.currency-mode .buttons {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.currency-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.currency-selector {
+    flex: 1;
+}
+
+.currency-selector label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.currency-selector select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+}
+
+.currency-result {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: var(--display-bg);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 1px solid var(--border-color);
+}
+
+.currency-func {
+    background-color: var(--operation-btn);
+    color: white;
+}
+
+.currency-func:hover {
+    background-color: var(--operation-hover);
+}
+
+/* Quiz Mode Styles */
+.quiz-mode {
+    padding: 20px;
+}
+
+.quiz-question {
+    padding: 15px;
+    background-color: var(--display-bg);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quiz-option {
+    height: 60px;
+    background-color: var(--quiz-option-bg);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.quiz-option:hover {
+    background-color: var(--quiz-option-hover);
+}
+
+.quiz-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.quiz-score, .quiz-timer {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.quiz-btn {
+    padding: 10px 20px;
+    background-color: var(--operation-btn);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.quiz-btn:hover {
+    background-color: var(--operation-hover);
+}
+
+.quiz-result {
+    padding: 15px;
+    background-color: var(--display-bg);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1rem;
+    border: 1px solid var(--border-color);
+}
+
+.correct {
+    background-color: var(--correct-answer) !important;
+    color: white;
+}
+
+.wrong {
+    background-color: var(--wrong-answer) !important;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .calculator-container {
+        border-radius: 0;
+    }
+    
+    .header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .mode-btn {
+        font-size: 0.7rem;
+        padding: 5px 2px;
+    }
+    
+    .mode-btn i {
+        font-size: 0.8rem;
+    }
+    
+    .scientific-mode .buttons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .scientific-mode button {
+        font-size: 0.9rem;
+    }
+    
+    .currency-controls {
+        flex-direction: column;
+    }
+    
+    .quiz-options {
+        grid-template-columns: 1fr;
+    }
+}

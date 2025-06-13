@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="header">
+            <h1>Advanced Calculator</h1>
+            <div class="mode-toggle">
+                <button id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="standard">
+                <i class="fas fa-calculator"></i> Standard
+            </button>
+            <button class="mode-btn" data-mode="scientific">
+                <i class="fas fa-square-root-alt"></i> Scientific
+            </button>
+            <button class="mode-btn" data-mode="currency">
+                <i class="fas fa-money-bill-wave"></i> Currency
+            </button>
+            <button class="mode-btn" data-mode="quiz">
+                <i class="fas fa-question-circle"></i> Quiz
+            </button>
+        </div>
+        
+        <div class="calculator standard-mode" id="calculator">
+            <div class="display">
+                <div class="previous-operand" id="previous-operand"></div>
+                <div class="current-operand" id="current-operand">0</div>
+            </div>
+            
+            <div class="buttons">
+                <button class="span-two" id="clear">AC</button>
+                <button id="delete"><i class="fas fa-backspace"></i></button>
+                <button class="operation" id="divide">/</button>
+                
+                <button class="number" id="seven">7</button>
+                <button class="number" id="eight">8</button>
+                <button class="number" id="nine">9</button>
+                <button class="operation" id="multiply">×</button>
+                
+                <button class="number" id="four">4</button>
+                <button class="number" id="five">5</button>
+                <button class="number" id="six">6</button>
+                <button class="operation" id="subtract">-</button>
+                
+                <button class="number" id="one">1</button>
+                <button class="number" id="two">2</button>
+                <button class="number" id="three">3</button>
+                <button class="operation" id="add">+</button>
+                
+                <button class="number" id="zero">0</button>
+                <button class="number" id="decimal">.</button>
+                <button class="span-two" id="equals">=</button>
+            </div>
+        </div>
+        
+        <div class="calculator scientific-mode hidden" id="scientific-calculator">
+            <div class="display">
+                <div class="previous-operand" id="sci-previous-operand"></div>
+                <div class="current-operand" id="sci-current-operand">0</div>
+            </div>
+            
+            <div class="buttons">
+                <button class="sci-func" id="sci-clear">AC</button>
+                <button class="sci-func" id="sci-delete"><i class="fas fa-backspace"></i></button>
+                <button class="sci-func" id="sci-parentheses">( )</button>
+                <button class="sci-func" id="sci-percent">%</button>
+                <button class="sci-operation" id="sci-divide">/</button>
+                
+                <button class="sci-func" id="sci-sin">sin</button>
+                <button class="sci-func" id="sci-cos">cos</button>
+                <button class="sci-func" id="sci-tan">tan</button>
+                <button class="sci-func" id="sci-pi">π</button>
+                <button class="sci-operation" id="sci-multiply">×</button>
+                
+                <button class="sci-number" id="sci-seven">7</button>
+                <button class="sci-number" id="sci-eight">8</button>
+                <button class="sci-number" id="sci-nine">9</button>
+                <button class="sci-func" id="sci-sqrt">√</button>
+                <button class="sci-operation" id="sci-subtract">-</button>
+                
+                <button class="sci-number" id="sci-four">4</button>
+                <button class="sci-number" id="sci-five">5</button>
+                <button class="sci-number" id="sci-six">6</button>
+                <button class="sci-func" id="sci-power">x^y</button>
+                <button class="sci-operation" id="sci-add">+</button>
+                
+                <button class="sci-number" id="sci-one">1</button>
+                <button class="sci-number" id="sci-two">2</button>
+                <button class="sci-number" id="sci-three">3</button>
+                <button class="sci-func" id="sci-factorial">x!</button>
+                <button class="sci-operation" id="sci-equals">=</button>
+                
+                <button class="sci-number" id="sci-zero">0</button>
+                <button class="sci-number" id="sci-decimal">.</button>
+                <button class="sci-func" id="sci-log">log</button>
+                <button class="sci-func" id="sci-ln">ln</button>
+                <button class="sci-func" id="sci-e">e</button>
+            </div>
+        </div>
+        
+        <div class="calculator currency-mode hidden" id="currency-calculator">
+            <div class="display">
+                <div class="current-operand" id="currency-display">0</div>
+            </div>
+            
+            <div class="currency-controls">
+                <div class="currency-selector">
+                    <label>From:</label>
+                    <select id="from-currency">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                    </select>
+                </div>
+                
+                <div class="currency-selector">
+                    <label>To:</label>
+                    <select id="to-currency">
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button class="number" id="curr-seven">7</button>
+                <button class="number" id="curr-eight">8</button>
+                <button class="number" id="curr-nine">9</button>
+                <button class="currency-func" id="curr-clear">AC</button>
+                
+                <button class="number" id="curr-four">4</button>
+                <button class="number" id="curr-five">5</button>
+                <button class="number" id="curr-six">6</button>
+                <button class="currency-func" id="curr-delete"><i class="fas fa-backspace"></i></button>
+                
+                <button class="number" id="curr-one">1</button>
+                <button class="number" id="curr-two">2</button>
+                <button class="number" id="curr-three">3</button>
+                <button class="currency-func" id="curr-convert">Convert</button>
+                
+                <button class="number" id="curr-zero">0</button>
+                <button class="number" id="curr-decimal">.</button>
+                <button class="span-two currency-func" id="curr-swap">
+                    <i class="fas fa-exchange-alt"></i> Swap
+                </button>
+            </div>
+            
+            <div class="currency-result" id="currency-result"></div>
+        </div>
+        
+        <div class="calculator quiz-mode hidden" id="quiz-calculator">
+            <div class="quiz-question" id="quiz-question">
+                Click "Start Quiz" to begin!
+            </div>
+            
+            <div class="quiz-options">
+                <button class="quiz-option" id="option1"></button>
+                <button class="quiz-option" id="option2"></button>
+                <button class="quiz-option" id="option3"></button>
+                <button class="quiz-option" id="option4"></button>
+            </div>
+            
+            <div class="quiz-controls">
+                <div class="quiz-score">
+                    Score: <span id="quiz-score">0</span>
+                </div>
+                <div class="quiz-timer">
+                    Time: <span id="quiz-timer">30</span>s
+                </div>
+                <button class="quiz-btn" id="start-quiz">Start Quiz</button>
+                <button class="quiz-btn hidden" id="next-question">Next Question</button>
+            </div>
+            
+            <div class="quiz-result hidden" id="quiz-result"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
